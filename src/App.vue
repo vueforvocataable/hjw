@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <voca-input-text-field></voca-input-text-field>
-    <voca-table :vocaProp= voca></voca-table>
+    <VocaTextField></VocaTextField>
+    <VocaTable :vocaProp= voca></VocaTable>
   </div>
 </template>
 
@@ -12,14 +12,14 @@ import VocaTable from './components/VocaTable.vue'
 export default {
   name: 'App',
   components: {
-    'VocaTable': VocaTable,
-    'VocaInputTextField': VocaTextField
+    VocaTable,
+    VocaTextField
   },
   data: function () {
     return {
       voca: [
         {"english": "sample", "korean": "샘플"},
-        {"english": "sample", "korean": "샘플"}
+        {"english": "sample2", "korean": "샘플2"}
       ]
     }
   }
