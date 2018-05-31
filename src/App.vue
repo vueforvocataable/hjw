@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <VocaTextField></VocaTextField>
+    <VocaTextField v-on:addVoca="addVoca"></VocaTextField>
     <VocaTable :vocaProp= voca></VocaTable>
   </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
 import VocaTextField from './components/VocaTextField.vue'
 import VocaTable from './components/VocaTable.vue'
+
 
 export default {
   name: 'App',
@@ -17,10 +18,12 @@ export default {
   },
   data: function () {
     return {
-      voca: [
-        {"english": "sample", "korean": "샘플"},
-        {"english": "sample2", "korean": "샘플2"}
-      ]
+      voca: []
+    }
+  },
+  methods: {
+    addVoca: function(value) {
+      console.log(value)
     }
   }
 };

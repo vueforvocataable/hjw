@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'table', 
+  name: 'VocaTable', 
   props: ['vocaProp'],
   data () {
     return {
