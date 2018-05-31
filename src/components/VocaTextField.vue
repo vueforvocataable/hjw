@@ -1,6 +1,7 @@
 <template>
   <div>
-    <textarea id="inputField" v-model="text" rows="30" cols="50" placeholder="test 테스트 - 이러한 형식으로 입력해보세요."></textarea>
+    <textarea id="inputField" v-model="text" rows="30" cols="50" placeholder="test, 테스트
+set, 설정"></textarea>
     <br>
     <button @click="sendVoca()">click</button>
   </div>
@@ -12,11 +13,7 @@ export default {
   data () {
     return {
       text: "",
-      voca: [  
-        {"english": "sample", "korean": "샘플"},
-        {"english": "sample2", "korean": "샘플2"}
-        ],
-      msg: 'Welcome to Your Vue.js App'
+      voca: [ ]
     }
   },
   methods: {
@@ -29,15 +26,31 @@ export default {
       .filter((item) => {
         return item != ""
       })
-      console.log(text)
 
       return text
     },
-    formatToVoca: function() {
-      
+    formatToVoca: function(text) {
+      var vocaObj = new Array()
+      var cnt = 0
+      var englishItemTemp
+
+      text = text.forEach((item) => {
+        cnt++
+        if (cnt % 2 == 1) {
+          englishItemTemp = item
+        } else {
+          vocaObj.push({
+            "english": englishItemTemp,
+            "korean": item
+          })
+        }
+      })
+
+      return vocaObj
     },
     sendVoca: function() {
       this.text = this.textToVoca()
+      this.voca = this.formatToVoca(this.text)
       this.$emit('addVoca', this.voca)
     }
   }
