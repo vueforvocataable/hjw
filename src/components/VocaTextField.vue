@@ -20,10 +20,24 @@ export default {
     }
   },
   methods: {
-    // textToVoca: function() {
-    //   console.log(this.text)
-    // },
+    textToVoca: function() {
+      var inputField = document.getElementById("inputField")
+      var text = inputField.value.replace(/\n/g, ",").split(',')
+      .map((item) => {
+        return item.trim()
+      })
+      .filter((item) => {
+        return item != ""
+      })
+      console.log(text)
+
+      return text
+    },
+    formatToVoca: function() {
+      
+    },
     sendVoca: function() {
+      this.text = this.textToVoca()
       this.$emit('addVoca', this.voca)
     }
   }
