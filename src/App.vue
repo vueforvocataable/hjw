@@ -18,12 +18,12 @@ export default {
   },
   data: function () {
     return {
-      voca: []
+      voca: ""
     }
   },
   methods: {
     addVoca: function(value) {
-      console.log(value)
+      this.voca = value
     }
   }
 };
