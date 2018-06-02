@@ -3,7 +3,7 @@
     <textarea id="inputField" v-model="text" rows="30" cols="50" placeholder="test, 테스트
 set, 설정"></textarea>
     <br>
-    <button @click="sendVoca()">click</button>
+    <button @click="sendVocaToApp()">click</button>
   </div>
 </template>
 
@@ -17,29 +17,30 @@ export default {
     }
   },
   methods: {
-    textToVoca: function() {
-      var inputField = document.getElementById("inputField")
-      var text = inputField.value.replace(/\n/g, ",").split(',')
-      .map((item) => {
+    //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
+    reformText: function(text) {
+      text = text.replace(/\n/g, ",").split(',') //엔터값없애줌
+      .map((item) => { //공백없애줌
         return item.trim()
       })
-      .filter((item) => {
+      .filter((item) => { //""값 없애줌
         return item != ""
       })
 
       return text
     },
-    formatToVoca: function(text) {
+    //유저가 작성한 텍스트를 테이블에 보낼 형식으로 바꿔주는 함수
+    formatTextToVoca: function(text) {
       var vocaObj = new Array()
       var cnt = 0
       var englishItemTemp
 
       text = text.forEach((item) => {
         cnt++
-        if (cnt % 2 == 1) {
+        if (cnt % 2 == 1) { 
           englishItemTemp = item
         } else {
-          vocaObj.push({
+          vocaObj.push({ 
             "english": englishItemTemp,
             "korean": item
           })
@@ -48,9 +49,13 @@ export default {
 
       return vocaObj
     },
-    sendVoca: function() {
-      this.text = this.textToVoca()
-      this.voca = this.formatToVoca(this.text)
+    //App.vue로 값을 보냄
+    sendVocaToApp: function() {
+      var text = document.getElementById("inputField").value
+
+      this.text = this.reformText(text)
+      this.voca = this.formatTextToVoca(this.text)
+      console.log(this.voca)
       this.$emit('addVoca', this.voca)
     }
   }
