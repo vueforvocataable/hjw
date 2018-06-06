@@ -1,13 +1,15 @@
 <template>
   <div>
-    <textarea id="inputField" v-model="text" rows="30" cols="50" placeholder="test, 테스트
+    <textarea autofocus id="inputField" v-model="text" rows="30" cols="50" placeholder="test, 테스트
 set, 설정"></textarea>
     <br>
-    <button @click="sendVocaToApp()">click</button>
+    <button @click="sendVocaToApp">변환</button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'VocaTextField', 
   data () {
@@ -51,12 +53,18 @@ export default {
     },
     //App.vue로 값을 보냄
     sendVocaToApp: function() {
+      // axios.get('https://reqres.in/api/users?page=2').then((response) => {
+      //   console.log(response)
+      // }).catch((err) => {
+      //   console.log(err)
+      // })
+
       var text = document.getElementById("inputField").value
 
       this.text = this.reformText(text)
       this.voca = this.formatTextToVoca(this.text)
-      console.log(this.voca)
-      this.$emit('addVoca', this.voca)
+      //table로 값을 전달함
+      this.$router.push({ name: 'Table', params: { vocaProp: this.voca }})
     }
   }
 }
