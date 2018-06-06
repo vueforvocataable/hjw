@@ -1,6 +1,6 @@
 <template>
   <div>
-    <textarea autofocus id="inputField" v-model="text" rows="30" cols="50" placeholder="test, 테스트
+    <textarea autofocus id="inputField" v-model="text" rows="10" cols="30" placeholder="test, 테스트
 set, 설정"></textarea>
     <br>
     <button @click="sendVocaToApp">변환</button>

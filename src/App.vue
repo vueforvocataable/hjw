@@ -1,16 +1,27 @@
 <template>
   <div id="app">
     <div>
-      <nav>
-        <router-link to="/textfield">textfield</router-link>
-        <router-link to="/table">table</router-link>
-      </nav>
+      <b-nav>
+        <b-nav-item active>
+          <router-link to="/textfield">textfield</router-link>
+        </b-nav-item>
+        <b-nav-item>
+          <router-link to="/table">table</router-link>
+        </b-nav-item>
+      </b-nav>
     </div>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue)
+
 export default {
   name: 'App',
   components: {
