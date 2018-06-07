@@ -13,7 +13,12 @@
 <script>
 export default {
   name: 'VocaTable', 
-  props: ['vocaProp'],
+  props: {
+    vocaProp: {
+      type: Array,
+      default: []
+    }
+  },
   data () {
     return {
     }

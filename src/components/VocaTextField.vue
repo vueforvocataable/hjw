@@ -1,21 +1,26 @@
 <template>
   <div>
-    <textarea autofocus id="inputField" v-model="text" rows="10" cols="30" placeholder="test, 테스트
-set, 설정"></textarea>
+    <b-form-textarea autofocus 
+    id="inputField" 
+    v-model="text" 
+    rows="10" 
+    placeholder="test, 테스트
+set, 설정">
+</b-form-textarea>
     <br>
-    <button @click="sendVocaToApp">변환</button>
+    <b-button variant="primary" @click="sendVocaToApp">변환</b-button>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'VocaTextField', 
   data () {
     return {
       text: "",
-      voca: [ ]
+      voca: []
     }
   },
   methods: {
@@ -59,9 +64,7 @@ export default {
       //   console.log(err)
       // })
 
-      var text = document.getElementById("inputField").value
-
-      this.text = this.reformText(text)
+      this.text = this.reformText(this.text)
       this.voca = this.formatTextToVoca(this.text)
       //table로 값을 전달함
       this.$router.push({ name: 'Table', params: { vocaProp: this.voca }})
