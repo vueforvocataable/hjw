@@ -35,8 +35,9 @@ export default {
     },
   methods: {
     shuffle: function() {
-      for(var i = this.vocas.length-1; 0 <= i; i--) {
+      for(var i = this.vocas.length; 0 <= i; i--) {
        var random = Math.floor(Math.random() * i)
+       console.log(random)
        var temp = this.vocas.splice(random, 1)
       this.vocas = this.vocas.concat(temp)
       }
