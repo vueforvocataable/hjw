@@ -1,11 +1,11 @@
 <template>
   <div>
-    <b-form-textarea autofocus 
-    id="inputField" 
-    v-model="text" 
-    rows="10" 
-    placeholder="test, 테스트
-set, 설정">
+    <b-form-textarea autofocus
+      id="inputField"
+      v-model="text"
+      rows="10"
+      placeholder="test, 테스트
+  set, 설정">
 </b-form-textarea>
     <br>
     <b-button variant="primary" @click="sendVocaToApp">변환</b-button>
@@ -14,9 +14,9 @@ set, 설정">
 
 <script>
 // import axios from 'axios'
-
+//TODO: modal추가
 export default {
-  name: 'VocaTextField', 
+  name: 'VocaTextField',
   data () {
     return {
       text: "",
@@ -44,10 +44,10 @@ export default {
 
       text = text.forEach((item) => {
         cnt++
-        if (cnt % 2 == 1) { 
+        if (cnt % 2 == 1) {
           englishItemTemp = item
         } else {
-          vocaObj.push({ 
+          vocaObj.push({
             "english": englishItemTemp,
             "korean": item
           })
@@ -55,6 +55,11 @@ export default {
       })
 
       return vocaObj
+    },
+    isEmpty: function(text) {
+      if (text) {
+
+      }
     },
     //App.vue로 값을 보냄
     sendVocaToApp: function() {
