@@ -71,7 +71,11 @@ export default {
 
       this.text = this.reformText(this.text)
       this.voca = this.formatTextToVoca(this.text)
-      //table로 값을 전달함
+
+      window.localStorage.setItem('savedItems', this.voca)
+      //TODO : 아이템 꺼내오기
+      console.log(window.localStorage.getItem('savedItems'))
+      //router에서 table로 값을 전달함
       this.$router.push({ name: 'Table', params: { vocaProp: this.voca }})
     }
   }
