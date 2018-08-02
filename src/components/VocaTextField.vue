@@ -13,15 +13,32 @@
 </template>
 
 <script>
+// 서버에서 데이터 받아오는 부분
 // import axios from 'axios'
 //TODO: modal추가
 export default {
   name: 'VocaTextField',
   data () {
     return {
+      //텍스트 에이리어에 있는 텍스트를 담는 변수
       text: "",
+      //텍스트를 리폼한 단어를 담는 변수
       voca: []
     }
+  },
+  created () {
+    let savedvocas = JSON.parse(localStorage.getItem('savedItems'))
+    //TODO: undefind 있으면 제거하는거 추가
+    let temp
+    savedvocas.forEach((item) => {
+      temp += `${item.english}, ${item.korean}\n`
+    })
+    this.text = temp
+  },
+  destroyed () {
+    //값을 전달하기전 로컬스토리지에 저장한다
+    localStorage.setItem('savedItems', JSON.stringify(this.voca))
+
   },
   methods: {
     //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
@@ -56,13 +73,17 @@ export default {
 
       return vocaObj
     },
+    //비었는지 확인
+    //@wanning 아직 구현안함
     isEmpty: function(text) {
       if (text) {
 
       }
     },
-    //App.vue로 값을 보냄
+    //버튼클릭시 App.vue로 값을 보냄
+    //TODO table버튼 눌러도 되도록
     sendVocaToApp: function() {
+      // 서버에서 데이터 받아오는 부분
       // axios.get('https://reqres.in/api/users?page=2').then((response) => {
       //   console.log(response)
       // }).catch((err) => {
@@ -72,9 +93,6 @@ export default {
       this.text = this.reformText(this.text)
       this.voca = this.formatTextToVoca(this.text)
 
-      window.localStorage.setItem('savedItems', this.voca)
-      //TODO : 아이템 꺼내오기
-      console.log(window.localStorage.getItem('savedItems'))
       //router에서 table로 값을 전달함
       this.$router.push({ name: 'Table', params: { vocaProp: this.voca }})
     }
