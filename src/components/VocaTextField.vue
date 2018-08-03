@@ -8,14 +8,11 @@
   set, 설정">
 </b-form-textarea>
     <br>
-    <b-button variant="primary" @click="sendVocaToApp">변환</b-button>
+    <b-button variant="primary" @click="sendVocaToTable">변환</b-button>
   </div>
 </template>
 
 <script>
-// 서버에서 데이터 받아오는 부분
-// import axios from 'axios'
-//TODO: modal추가
 export default {
   name: 'VocaTextField',
   data () {
@@ -27,18 +24,10 @@ export default {
     }
   },
   created () {
-    let savedvocas = JSON.parse(localStorage.getItem('savedItems'))
-    //TODO: undefind 있으면 제거하는거 추가
-    let temp
-    savedvocas.forEach((item) => {
-      temp += `${item.english}, ${item.korean}\n`
-    })
-    this.text = temp
+    this.getSavedDataOnLocalStorage()
   },
   destroyed () {
-    //값을 전달하기전 로컬스토리지에 저장한다
-    localStorage.setItem('savedItems', JSON.stringify(this.voca))
-
+    this.saveDataOnLocalStorage();
   },
   methods: {
     //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
@@ -73,28 +62,26 @@ export default {
 
       return vocaObj
     },
-    //비었는지 확인
-    //@wanning 아직 구현안함
-    isEmpty: function(text) {
-      if (text) {
-
-      }
-    },
     //버튼클릭시 App.vue로 값을 보냄
     //TODO table버튼 눌러도 되도록
-    sendVocaToApp: function() {
-      // 서버에서 데이터 받아오는 부분
-      // axios.get('https://reqres.in/api/users?page=2').then((response) => {
-      //   console.log(response)
-      // }).catch((err) => {
-      //   console.log(err)
-      // })
-
+    sendVocaToTable: function() {
       this.text = this.reformText(this.text)
       this.voca = this.formatTextToVoca(this.text)
 
       //router에서 table로 값을 전달함
       this.$router.push({ name: 'Table', params: { vocaProp: this.voca }})
+    },
+    //로컬스토리지에 저장한 데이터를 가져옴
+    getSavedDataOnLocalStorage: function() {
+      let savedvocas = JSON.parse(localStorage.getItem('savedItems'))
+      savedvocas.forEach((item) => {
+          this.text += `${item.english}, ${item.korean}\n`
+      })
+    },
+    //값을 전달하기전 로컬스토리지에 저장한다
+    saveDataOnLocalStorage: function() {
+      if (this.voca.length < 1) return
+      localStorage.setItem('savedItems', JSON.stringify(this.voca))
     }
   }
 }
