@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div>
+    <div class="d-print-none">
       <b-nav>
         <b-nav-item active>
           <router-link to="/textfield">textfield</router-link>
