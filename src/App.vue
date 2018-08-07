@@ -11,6 +11,7 @@
       </b-nav>
     </div>
     <router-view></router-view>
+    <!-- vocaAd를 불러오는 부분  -->
   </div>
 </template>
 
