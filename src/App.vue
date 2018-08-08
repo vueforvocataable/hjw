@@ -2,7 +2,7 @@
   <div id="app">
     <div class="d-print-none">
       <b-nav>
-        <b-nav-item active>
+        <b-nav-item active> <!-- TODO 이 부분이 화면 켰을 때 먼저 실행되도록 하기 -->
           <router-link to="/textfield">textfield</router-link>
         </b-nav-item>
         <b-nav-item>
@@ -11,7 +11,7 @@
       </b-nav>
     </div>
     <router-view></router-view>
-    <!-- vocaAd를 불러오는 부분  -->
+     <VocaAd></VocaAd>
   </div>
 </template>
 
@@ -21,11 +21,14 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import VocaAd from './components/VocaAd.vue'
+
 Vue.use(BootstrapVue)
 
 export default {
   name: 'App',
   components: {
+    VocaAd
   },
   data: function () {
     return {
