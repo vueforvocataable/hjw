@@ -9,10 +9,13 @@
 </b-form-textarea>
     <br>
     <b-button variant="primary" @click="sendVocaToTable">변환</b-button>
+    <b-button variant="primary" @click="downloadVoca">파일 저장</b-button>
   </div>
 </template>
 
 <script>
+import { saveAs } from '@elastic/filesaver'
+
 export default {
   name: 'VocaTextField',
   data () {
@@ -63,13 +66,20 @@ export default {
       return vocaObj
     },
     //버튼클릭시 App.vue로 값을 보냄
-    //TODO table버튼 눌러도 되도록
     sendVocaToTable: function() {
       this.text = this.reformText(this.text)
       this.voca = this.formatTextToVoca(this.text)
 
       //router에서 table로 값을 전달함
       this.$router.push({ name: 'Table', params: { vocaProp: this.voca }})
+    },
+    //파일 저장 버튼 누르면 실행
+    //텍스트 필드의 텍스트를 파일로 저장함
+    downloadVoca: function() {
+      if (this.text.length < 1) return
+
+      var blob = new Blob([this.text], {type: "text/plain;charset=utf-8"});
+      saveAs(blob, "Voca.txt");
     },
     //로컬스토리지에 저장한 데이터를 가져옴
     getSavedDataOnLocalStorage: function() {
