@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <div class="d-print-none">
-      <b-nav>
-        <b-nav-item active> <!-- TODO 이 부분이 화면 켰을 때 먼저 실행되도록 하기 -->
+
+    <header class="d-print-none">
+      <b-nav fill tabs>
+        <b-nav-item> <!-- TODO 이 부분이 화면 켰을 때 먼저 실행되도록 하기 -->
           <router-link to="/textfield">textfield</router-link>
         </b-nav-item>
         <b-nav-item>
           <router-link to="/table">table</router-link>
         </b-nav-item>
       </b-nav>
-    </div>
-    <router-view></router-view>
-     <VocaAd></VocaAd>
+    </header>
+
+    <body>
+      <router-view></router-view>
+
+    </body>
+
   </div>
 </template>
 

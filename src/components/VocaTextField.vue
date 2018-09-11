@@ -1,16 +1,26 @@
 <template>
-  <div>
-    <!-- TODO: 레이아웃 설정 -->
-    <b-form-textarea autofocus id="inputField" v-model="text" rows="10" class="w-50">
-    </b-form-textarea>
-    <br>
-    <b-button variant="primary" v-on:click="sendVocaToTable()">ConvertToVoca</b-button>
-    <b-button variant="primary" v-on:click="downloadVoca()">SaveFile</b-button>
+  <div name="root" class="content">
+    <b-container class="mt-2">
+      <b-row>
 
-    <div>
-      <label for="excelFileInput" class="btn">ConvertExcelToVoca</label>
-      <input id="excelFileInput" type="file" ref="excelFileInput" multiple v-on:change="excelToVoca()" accept=".xlsx" />
-    </div>
+        <b-col sm="8">
+          <main class="main">
+            <b-form-textarea autofocus id="inputField" no-resize :rows="15" :max-rows="15" v-model="text"/>
+          </main>
+        </b-col>
+        
+        <b-col sm="4">
+          <aside class="aside">
+            <b-button-group vertical size="sm" class="w-100 p-1">
+              <b-button variant="primary" v-on:click="sendVocaToTable()">ConvertToVoca</b-button>
+              <b-button variant="primary" v-on:click="downloadVoca()">SaveFile</b-button> 
+              <b-form-file v-bind:state="isFileUploaded" ref="excelFileInput" v-on:change="excelToVoca()" accept=".xlsx" />
+            </b-button-group>
+          </aside>
+        </b-col>
+
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -27,7 +37,8 @@
         //텍스트 에이리어에 있는 텍스트를 담는 변수
         text: "test, 테스트 \nset, 설정",
         //텍스트를 리폼한 단어를 담는 변수
-        voca: []
+        voca: [],
+        isFileUploaded: false
       }
     },
     created() {
@@ -109,10 +120,12 @@
       },
       //엑셀파일을 텍스트필드에 사용할 형태로 바꿈
       excelToVoca: function () {
-        let uploadedFiles = this.$refs.excelFileInput.files;
-        let f = uploadedFiles[0];
+        let ref = this.$refs.excelFileInput;
+        let uploadedFiles = ref.$refs.input.files[0];
         let reader = new FileReader();
         let self = this;
+
+        if(uploadedFiles) this.isFileUploaded = true;
 
         reader.onload = function (e) {
           let data = e.target.result;
@@ -137,17 +150,12 @@
             self.text += `${x[key]}, ${x[value]}\n`;
           })
         }
-        reader.readAsArrayBuffer(f);
+        reader.readAsArrayBuffer(uploadedFiles);
       }
     }
   }
 
 </script>
 
-<style>
-  #excelFileInput {
-    /* display: inline-block; */
-    visibility: hidden;
-  }
-
+<style scoped>
 </style>
