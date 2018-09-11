@@ -109,6 +109,7 @@
 
         if (!savedVocas) return;
 
+        this.text = "";
         savedVocas.forEach((item) => {
           this.text += `${item.english}, ${item.korean}\n`;
         })
