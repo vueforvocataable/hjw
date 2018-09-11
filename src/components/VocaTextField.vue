@@ -9,6 +9,7 @@
           </main>
         </b-col>
         
+        <!-- TODO: 이 부분 컴포넌트로 빼기 -->
         <b-col sm="4">
           <aside class="aside">
             <b-button-group vertical size="sm" class="w-100 p-1">
@@ -129,6 +130,7 @@
         if(uploadedFiles) this.isFileUploaded = true;
 
         reader.onload = function (e) {
+          self.text = "";  
           let data = e.target.result;
           data = new Uint8Array(data);
           let workbook = XLSX.read(data, {
