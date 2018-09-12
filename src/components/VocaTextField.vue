@@ -20,7 +20,19 @@
         </b-col>
 
       </b-row>
+      <b-row>
+        <b-col>
+              <!-- TODO: scroll 내리면 계속 나오게 -->
+          <b-card-group columns class="mt-2">
+            <b-card class="text-center" v-for="(remoteVoca, index) in remoteVocas" :key="index">
+              <pre>{{remoteVoca.voca}}</pre>
+            </b-card>
+          </b-card-group>
+
+        </b-col>
+      </b-row>
     </b-container>
+  
   </div>
 </template>
 
@@ -29,6 +41,7 @@
     saveAs
   } from '@elastic/filesaver';
   import XLSX from 'xlsx';
+  import axios from 'axios';
 
   export default {
     name: 'VocaTextField',
@@ -38,16 +51,51 @@
         text: "test, 테스트 \nset, 설정",
         //텍스트를 리폼한 단어를 담는 변수
         voca: [],
-        isFileUploaded: false
+        isFileUploaded: false,
+        serverUrl: "http://localhost:5001",
+        remoteVocas: []
       }
     },
     created() {
       this.getSavedDataOnLocalStorage();
+      this.getVocas();
     },
     destroyed() {
       this.saveDataOnLocalStorage();
+      this.postVocas(this.voca);
     },
     methods: {
+      postVocas: function (voca) {
+        if (!voca || voca.length < 1) return;
+        let router = "/api/voca";
+
+        let test ="";
+        voca.forEach((x, index) => {
+          test += `${voca[index].english}, ${voca[index].korean}\n`;
+        });
+
+        axios.post(this.serverUrl + router, {
+          voca: test
+          })
+          .then(res => {
+            console.log(res);
+          })
+          .catch(err => {
+           console.log(err);
+          })
+      },
+      getVocas: function () {
+        let router = "/api/voca";
+  
+        axios.get(this.serverUrl+router)
+        .then((res) => {
+            this.remoteVocas = res.data.vocas;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      },
       //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
       reformText: function (text) {
         text = text.replace(/\n/g, ",").split(',') //엔터값없애줌
