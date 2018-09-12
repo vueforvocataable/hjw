@@ -1,6 +1,6 @@
 <template>
   <div name="root" class="content">
-    <b-container class="mt-2">
+    <b-container class="mt-4">
       <b-row>
 
         <b-col sm="8">
@@ -23,7 +23,7 @@
       <b-row>
         <b-col>
               <!-- TODO: scroll 내리면 계속 나오게 -->
-          <b-card-group columns class="mt-2">
+          <b-card-group columns class="mt-4">
             <b-card class="text-center" v-for="(remoteVoca, index) in remoteVocas" :key="index">
               <pre>{{remoteVoca.voca}}</pre>
             </b-card>

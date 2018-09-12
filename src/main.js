@@ -7,6 +7,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes: Routes
 })
+router.replace({ path: "textfield" })
 
 new Vue({
   el: '#app',
