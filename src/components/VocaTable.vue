@@ -1,5 +1,6 @@
 <template>
   <div>
+<<<<<<< HEAD
     <div class="menu">
       <b-form-checkbox v-model="blindEng">영어 가리기</b-form-checkbox>
       <b-form-checkbox v-model="blindKor">뜻 가리기</b-form-checkbox>
@@ -106,3 +107,58 @@ import _ from 'underscore';
     width: 400px;
   }
 </style>
+=======
+    <button @click="showEn = !showEn">영어 비우기</button>
+    <button @click="showKo = !showKo">한글 비우기</button>
+    <button @click="shuffle()">shuffle</button>
+    <table width="300" cellpadding="1" cellspacing="1" border="1" style="table-layout:fixed; word-break:break-all;">
+      <tr v-for="item in contents()" :key="item.english">
+        <td><p v-if="showEn">{{item.english}}</p></td>
+        <td><p v-if="showKo">{{item.korean}}</p></td>
+      </tr>
+    </table>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'VocaTable',
+  props: {
+    vocaProp: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data () {
+    return {
+      vocas: '',
+      showEn: true,
+      showKo: true
+    }
+  },
+  created(){
+        if (this.vocaProp) {
+          this.vocas = this.vocaProp
+        }
+    },
+  methods: {
+    shuffle: function() {
+      for(var i = this.vocas.length; 0 <= i; i--) {
+       var random = Math.floor(Math.random() * i)
+       console.log(random)
+       var temp = this.vocas.splice(random, 1)
+      this.vocas = this.vocas.concat(temp)
+      }
+    },
+    contents: function() {
+      return this.vocas
+    }
+  },
+  computed: {
+  }
+}
+</script>
+
+<style>
+</style>
+>>>>>>> 17972f614f2cc18186587bb8865dcb312c71a942
