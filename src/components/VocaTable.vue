@@ -12,7 +12,7 @@
     <b-container class="mt-4">
       <b-row>
         <b-col>
-          <b-table :fields="fields" :items="tableMake.slice(1 + (vocaPagination - 1) * 50, 26 + (vocaPagination - 1) * 50)"
+          <b-table :fields="fields" :items="tableMake.slice(0 + (vocaPagination - 1) * 50, 25 + (vocaPagination - 1) * 50)"
             :small="small" :striped="striped" :bordered="bordered">
             <template slot="index" slot-scope="data"> {{data.index + 1 +(vocaPagination - 1) * 50}} </template>
             <template v-if="!blindEng" slot="english" slot-scope="data"> {{data.item.english}} </template>
@@ -20,7 +20,7 @@
           </b-table>
         </b-col>
         <b-col>
-          <b-table :v-model="this.fields.label" :fields="fields" :items="tableMake.slice(26 + (vocaPagination - 1) * 50, 51 + (vocaPagination - 1) * 50)"
+          <b-table :v-model="this.fields.label" :fields="fields" :items="tableMake.slice(25 + (vocaPagination - 1) * 50, 50 + (vocaPagination - 1) * 50)"
             :small="small" :striped="striped" :bordered="bordered">
             <template slot="index" slot-scope="data"> {{data.index + 26 + (vocaPagination - 1) * 50}} </template>
             <template v-if="!blindEng" slot="english" slot-scope="data"> {{data.item.english}} </template>
@@ -51,8 +51,15 @@
       vocaProp: {
         type: Array,
         default: () => [{
-          "english": "",
-          "korean": ""
+          "english": "Hello",
+          "korean": "안녕하세요"
+        }]
+      }, 
+      tableHeaderProp: {
+        type: Array,
+        default: () => [{
+          "english": "영어",
+          "korean": "한글"
         }]
       }
     },
@@ -64,11 +71,11 @@
           },
           {
             key: "english",
-            label: this.vocaProp[0].english
+            label: this.tableHeaderProp[0].english
           },
           {
             key: "korean",
-            label: this.vocaProp[0].korean
+            label: this.tableHeaderProp[0].korean
           }
         ],
         vocas: "",
@@ -105,7 +112,7 @@
         });
         //공백에 단어를 넣어준다.
         this.vocas = this.vocaProp;
-        for (let i = 1; i < this.vocas.length; i++) {
+        for (let i = 0; i < this.vocas.length; i++) {
           this.tableMake[i] = this.vocas[i];
         }
       }

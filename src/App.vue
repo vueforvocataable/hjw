@@ -3,14 +3,14 @@
 
     <header class="d-print-none">
       <b-nav fill tabs>
-        <b-nav-item> <!-- TODO 이 부분이 화면 켰을 때 먼저 실행되도록 하기 -->
-          <router-link to="/textfield" replace active-class>Textfield</router-link>
+        <b-nav-item> 
+          <router-link to="/textfield" replace active-class>입력</router-link>
         </b-nav-item>
         <b-nav-item>
-          <router-link to="/table" replace>Table</router-link>
+          <router-link to="/table" replace>단어시험지</router-link>
         </b-nav-item>
            <b-nav-item>
-          <router-link to="/explanation" replace>Explanation</router-link>
+          <router-link to="/explanation" replace>가이드</router-link>
         </b-nav-item>
       </b-nav>
     </header>

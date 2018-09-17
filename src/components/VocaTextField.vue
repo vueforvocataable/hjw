@@ -12,8 +12,8 @@
         <b-col sm="4">
           <aside class="aside">
             <b-button-group vertical size="sm" class="w-100 p-1">
-              <b-button variant="primary" v-on:click="sendVocaToTable()">ConvertToVoca</b-button>
-              <b-button variant="primary" v-on:click="downloadVoca()">SaveFile</b-button> 
+              <b-button variant="primary" v-on:click="sendVocaToTable()">단어시험지 만들기</b-button>
+              <b-button variant="primary" v-on:click="downloadVoca()">메모장으로 저장</b-button> 
               <b-form-file v-bind:state="isFileUploaded" ref="excelFileInput" v-on:change="excelToVoca()" accept=".xlsx" />
             </b-button-group>
           </aside>
@@ -48,9 +48,10 @@
     data() {
       return {
         //텍스트 에이리어에 있는 텍스트를 담는 변수
-        text: "test, 테스트 \nset, 설정",
+        text: "영어단어, 한글\nSimple, 간단한\nEnglish, 영어\nTest paper, 시험지 ",
         //텍스트를 리폼한 단어를 담는 변수
         voca: [],
+        vocaHeader: [],
         isFileUploaded: false,
         serverUrl: "http://localhost:5001",
         remoteVocas: []
@@ -126,6 +127,9 @@
           }
         });
 
+        this.vocaHeader = vocaObj.splice(0, 1);
+
+
         return vocaObj;
       },
       //버튼클릭시 App.vue로 값을 보냄
@@ -137,7 +141,8 @@
         this.$router.push({
           name: 'Table',
           params: {
-            vocaProp: this.voca
+            vocaProp: this.voca,
+            tableHeaderProp: this.vocaHeader
           }
         });
       },
@@ -164,8 +169,8 @@
       },
       //값을 전달하기전 로컬스토리지에 저장한다
       saveDataOnLocalStorage: function () {
-        if (this.voca.length < 1) return;
-        localStorage.setItem('savedItems', JSON.stringify(this.voca));
+        if (this.vocaHeader.length < 1) return;
+        localStorage.setItem('savedItems', JSON.stringify(this.vocaHeader.concat(this.voca)));
       },
       //엑셀파일을 텍스트필드에 사용할 형태로 바꿈
       excelToVoca: function () {
@@ -200,12 +205,19 @@
             self.text += `${x[key]}, ${x[value]}\n`;
           })
         }
-        reader.readAsArrayBuffer(uploadedFiles);
+        try {
+          reader.readAsArrayBuffer(uploadedFiles);
+        } catch (err) {
+          console.log(err.message)
+        }
       }
     }
   }
 
 </script>
 
-<style scoped>
+<style>
+.custom-file-input:lang(en)~.custom-file-label::after {
+    content: "엑셀 가져오기";
+}
 </style>
