@@ -17,6 +17,7 @@
     "jquery": "^3.3.1",
     "nice-try": "^1.0.5",
     "npm": "^6.4.1",
+    "popper.js": "^1.14.4",
     "underscore": "^1.9.1",
     "vue": "^2.5.11",
     "vue-router": "^3.0.1",

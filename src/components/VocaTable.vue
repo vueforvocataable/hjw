@@ -101,6 +101,7 @@
         this.tableMake.splice(0, suffled.length, ...suffled);
       },
       //테이블 공백 채우기 예: 실제 단어 1개 + 공백 49개...
+      //TODO construct로 만들기
       init: function () {
         //공백 만들 개수 생성.
         let emptyArr = Math.floor(this.vocaProp.length / 50) + 1;

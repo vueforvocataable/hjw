@@ -1,38 +1,49 @@
 <template>
-  <div name="root" class="content">
+  <div>
     <b-container class="mt-4">
-      <b-row>
 
-        <b-col sm="8">
-          <main class="main">
-            <b-form-textarea autofocus id="inputField" no-resize :rows="15" :max-rows="15" v-model="text"/>
+      <b-row>
+        <b-col>
+          <main class="header mt-2 mb-2">
+            <p>빠르고 간단하게 텍스트를 단어시험지로 만들어 보세요.</p>
           </main>
         </b-col>
-        
+      </b-row>
+
+      <b-row>
+        <b-col sm="8">
+          <main class="main">
+            <b-form-textarea v-b-popover.hover="'첫 줄은 단어시험지의 헤더, 각 단어 사이는 \',\'로 구분합니다.'" title="사용법" autofocus class="text-field" id="inputField" no-resize :rows="20" :max-rows="20" v-model="text" />
+          </main>
+        </b-col>
+
         <b-col sm="4">
-          <aside class="aside">
-            <b-button-group vertical size="sm" class="w-100 p-1">
-              <b-button variant="primary" v-on:click="sendVocaToTable()">단어시험지 만들기</b-button>
-              <b-button variant="primary" v-on:click="downloadVoca()">메모장으로 저장</b-button> 
-              <b-form-file v-bind:state="isFileUploaded" ref="excelFileInput" v-on:change="excelToVoca()" accept=".xlsx" />
-            </b-button-group>
-          </aside>
+          <b-row>
+              <b-button-group vertical size="sm" class="w-100 p-1 mx-auto">
+                <b-button class="btn" v-on:click="sendVocaToTable()">단어시험지 만들기</b-button>
+                <b-button class="btn" v-on:click="downloadVoca()">메모장으로 저장</b-button>
+                <b-form-file class="btn" type=file ref="excelFileInput" v-on:change="excelToVoca()" accept=".xlsx" />
+              </b-button-group>
+          </b-row>
+          <b-row>
+
+          </b-row>
         </b-col>
 
       </b-row>
+
       <b-row>
         <b-col>
-              <!-- TODO: scroll 내리면 계속 나오게 -->
           <b-card-group columns class="mt-4">
             <b-card class="text-center" v-for="(remoteVoca, index) in remoteVocas" :key="index">
               <pre>{{remoteVoca.voca}}</pre>
             </b-card>
           </b-card-group>
-
         </b-col>
       </b-row>
+
     </b-container>
-  
+
   </div>
 </template>
 
@@ -52,8 +63,7 @@
         //텍스트를 리폼한 단어를 담는 변수
         voca: [],
         vocaHeader: [],
-        isFileUploaded: false,
-        serverUrl: "http://localhost:5001",
+        serverUrl: "https://vocatestsserver.herokuapp.com",
         remoteVocas: []
       }
     },
@@ -70,31 +80,31 @@
         if (!voca || voca.length < 1) return;
         let router = "/api/voca";
 
-        let test ="";
+        let text = "";
         voca.forEach((x, index) => {
-          test += `${voca[index].english}, ${voca[index].korean}\n`;
+          text += `${voca[index].english}, ${voca[index].korean}\n`; //서버에 보낼 형식
         });
 
         axios.post(this.serverUrl + router, {
-          voca: test
+            voca: text
           })
           .then(res => {
             console.log(res);
           })
           .catch(err => {
-           console.log(err);
+            console.log(err);
           })
       },
       getVocas: function () {
         let router = "/api/voca";
-  
-        axios.get(this.serverUrl+router)
-        .then((res) => {
+
+        axios.get(this.serverUrl + router)
+          .then((res) => {
             this.remoteVocas = res.data.vocas;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
 
       },
       //입력받은 텍스트를 다듬은 후, 문자열 배열로 바꿔줌
@@ -179,19 +189,17 @@
         let reader = new FileReader();
         let self = this;
 
-        if(uploadedFiles) this.isFileUploaded = true;
+        if (uploadedFiles) this.isFileUploaded = true;
 
         reader.onload = function (e) {
-          self.text = "";  
+          self.text = "";
           let data = e.target.result;
           data = new Uint8Array(data);
           let workbook = XLSX.read(data, {
             type: "array"
           });
 
-          /* DO SOMETHING WITH workbook HERE */
           let first_sheet_name = workbook.SheetNames[0];
-          /* Get worksheet */
           let worksheet = workbook.Sheets[first_sheet_name];
           //It will prints with header and contents ex) Name, Home...
           let json = XLSX.utils.sheet_to_json(worksheet, {
@@ -217,7 +225,36 @@
 </script>
 
 <style>
-.custom-file-input:lang(en)~.custom-file-label::after {
-    content: "엑셀 가져오기";
-}
+  .text-field:focus {
+    border-color: #c03546;
+    box-shadow: 5px 5px rgb(248, 133, 133);
+  }
+
+  .btn:hover {
+    background-color: #c03546;
+    border-color: #c03546;
+    color: white;
+  }
+
+  .btn:focus {
+    border-color: #c03546;
+    box-shadow: 5px 5px rgb(248, 133, 133);
+  }
+
+  .btn:active {
+    background-color: #c03546;
+    border-color: #c03546;
+    box-shadow: 5px 5px rgb(248, 133, 133);
+  }
+
+  .btn {
+    background-color: white;
+    border-color: #c03546;
+    color: #c03546;
+  }
+
+  .custom-file-input:lang(en)~.custom-file-label::after {
+    content: "엑셀파일";
+  }
+
 </style>
