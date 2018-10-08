@@ -55,7 +55,7 @@
 <style>
   .nav {
     background-color: white;
-    box-shadow: 0px 1px #DBDBDB;
+    box-shadow: 0px 1px #c03546;
     font-weight: bold;
   }
   a {

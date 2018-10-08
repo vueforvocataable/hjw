@@ -1,7 +1,8 @@
 <template>
   <div class="mt-4">
     <b-container class="d-print-none">
-      <b-button variant="primary" @click="shuffle()">랜덤</b-button>
+      <a href="javascript:window.print()"><b-button class="btn btn-primary btn-lg">인쇄</b-button></a>
+      <b-button  class="btn btn-primary btn-lg" @click="shuffle()">랜덤</b-button>
       <b-form-checkbox v-model="blindEng">영어 가리기</b-form-checkbox>
       <b-form-checkbox v-model="blindKor">뜻 가리기</b-form-checkbox>
       <b-form-checkbox v-model="small">작게</b-form-checkbox>
@@ -44,7 +45,6 @@
   //5. 변수, 함수 이름 한번더 검토
   //6. data부분 vue store찾아서 외부 파일로 두기
   import _ from 'underscore';
-
   export default {
     name: "VocaTable",
     props: {
@@ -65,15 +65,18 @@
     },
     data() {
       return {
-        fields: [{
+        fields: [{ 
+           "class": "indexWidth",
             key: "index",
             label: ""
           },
           {
+            "class": "vocaWidth",
             key: "english",
             label: this.tableHeaderProp[0].english
           },
           {
+             "class": "vocaWidth",
             key: "korean",
             label: this.tableHeaderProp[0].korean
           }
@@ -101,12 +104,10 @@
         this.tableMake.splice(0, suffled.length, ...suffled);
       },
       //테이블 공백 채우기 예: 실제 단어 1개 + 공백 49개...
-      //TODO construct로 만들기
       init: function () {
         //공백 만들 개수 생성.
         let emptyArr = Math.floor(this.vocaProp.length / 50) + 1;
         emptyArr = emptyArr * 50;
-        //변수에 공백을 넣어줌.
         this.tableMake = new Array(emptyArr).fill({
           "english": "",
           "korean": ""
@@ -121,5 +122,29 @@
   }
 </script>
 
-<style scoped>
+<style>
+[type=checkbox]:checked+label:before {
+    background-color: palegreen !important;
+}
+.btn{
+    border: 2px solid palegreen;
+    background-color: white;
+    color: palegreen;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+.table {
+    table-layout: fixed;
+    word-wrap: break-word;  
+}
+.indexWidth { width:10%; text-align:center;}
+.vocaWidth{ text-align:center; }
+ @media print {
+   @page{ size:a4; margin-top: 20mm;}
+  .table td {
+      background-color: transparent !important;
+    }
+ }
 </style>

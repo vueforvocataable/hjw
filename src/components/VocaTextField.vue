@@ -230,6 +230,10 @@
     box-shadow: 5px 5px rgb(248, 133, 133);
   }
 
+  .text-field {
+    border-color: #c03546;
+  }
+
   .btn:hover {
     background-color: #c03546;
     border-color: #c03546;
@@ -249,7 +253,7 @@
 
   .btn {
     background-color: white;
-    border-color: #c03546;
+    border-color: #DBDBDB;
     color: #c03546;
   }
 
