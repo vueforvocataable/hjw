@@ -13,17 +13,19 @@
       <b-row>
         <b-col sm="8">
           <main class="main">
-            <b-form-textarea v-b-popover.hover="'첫 줄은 단어시험지의 헤더, 각 단어 사이는 \',\'로 구분합니다.'" title="사용법" autofocus class="text-field" id="inputField" no-resize :rows="20" :max-rows="20" v-model="text" />
+            <b-form-textarea v-b-popover.hover="'첫 줄은 단어시험지의 헤더, 각 단어 사이는 \',\'로 구분합니다.'"
+              title="사용법" autofocus class="text-field" id="inputField" no-resize :rows="20" :max-rows="20" v-model="text" />
           </main>
         </b-col>
 
         <b-col sm="4">
           <b-row>
-              <b-button-group vertical size="sm" class="w-100 p-1 mx-auto">
-                <b-button class="btn" v-on:click="sendVocaToTable()">단어시험지 만들기</b-button>
-                <b-button class="btn" v-on:click="downloadVoca()">메모장으로 저장</b-button>
-                <b-form-file class="btn" type=file ref="excelFileInput" v-on:change="excelToVoca()" accept=".xlsx" />
-              </b-button-group>
+            <b-button-group vertical size="sm" class="w-100 p-1 mx-auto">
+              <b-button :state="checkTextValidation" :disabled="checkTextValidation" class="btn" v-on:click="sendVocaToTable()">단어시험지 만들기</b-button>
+              <b-button class="btn" v-on:click="downloadVoca()">메모장으로 저장</b-button>
+              <b-form-file class="btn" v-b-popover.hover="'엑셀파일 설명...'" title="사용법" type=file ref="excelFileInput"
+                v-on:change="excelToVoca()" accept=".xlsx" />
+            </b-button-group>
           </b-row>
           <b-row>
 
@@ -59,7 +61,7 @@
     data() {
       return {
         //텍스트 에이리어에 있는 텍스트를 담는 변수
-        text: "영어단어, 한글\nSimple, 간단한\nEnglish, 영어\nTest paper, 시험지 ",
+        text: "영어단어, 한글\nSimple, 간단한\nVoca, 단어\nTest paper, 시험지 ",
         //텍스트를 리폼한 단어를 담는 변수
         voca: [],
         vocaHeader: [],
@@ -74,6 +76,24 @@
     destroyed() {
       this.saveDataOnLocalStorage();
       this.postVocas(this.voca);
+    },
+    computed: {
+      checkTextValidation: function () {
+        const csvRegexp = /^[^,]+(,[^,]*)$/
+        const arr = this.text.split("\n")
+
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] == "") continue
+
+          const result = csvRegexp.test(arr[i])
+
+          if (!result) { 
+            return true
+          }
+        }
+        
+        return false
+      }
     },
     methods: {
       postVocas: function (voca) {
@@ -95,6 +115,7 @@
             console.log(err);
           })
       },
+      //서버로 부터 텍스트 받음
       getVocas: function () {
         let router = "/api/voca";
 
@@ -224,38 +245,10 @@
 
 </script>
 
-<style>
-  .text-field:focus {
-    border-color: #c03546;
-    box-shadow: 5px 5px rgb(248, 133, 133);
-  }
-
-  .text-field {
-    border-color: #c03546;
-  }
-
-  .btn:hover {
-    background-color: #c03546;
-    border-color: #c03546;
-    color: white;
-  }
-
-  .btn:focus {
-    border-color: #c03546;
-    box-shadow: 5px 5px rgb(248, 133, 133);
-  }
-
-  .btn:active {
-    background-color: #c03546;
-    border-color: #c03546;
-    box-shadow: 5px 5px rgb(248, 133, 133);
-  }
-
-  .btn {
-    background-color: white;
-    border-color: #DBDBDB;
-    color: #c03546;
-  }
+<style lang="scss" scoped>
+  @import "~styles/button";
+  @import "~styles/colors";
+  @import "~styles/textarea";
 
   .custom-file-input:lang(en)~.custom-file-label::after {
     content: "엑셀파일";

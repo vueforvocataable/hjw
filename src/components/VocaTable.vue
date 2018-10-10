@@ -1,13 +1,17 @@
 <template>
   <div class="mt-4">
     <b-container class="d-print-none">
-      <a href="javascript:window.print()"><b-button class="btn btn-primary btn-lg">인쇄</b-button></a>
-      <b-button  class="btn btn-primary btn-lg" @click="shuffle()">랜덤</b-button>
-      <b-form-checkbox v-model="blindEng">영어 가리기</b-form-checkbox>
-      <b-form-checkbox v-model="blindKor">뜻 가리기</b-form-checkbox>
-      <b-form-checkbox v-model="small">작게</b-form-checkbox>
-      <b-form-checkbox v-model="striped">줄무늬</b-form-checkbox>
-      <b-form-checkbox v-model="bordered">줄칸 나누기</b-form-checkbox>
+      <a href="javascript:window.print()">
+        <b-button class="btn btn-primary btn-lg">인쇄</b-button>
+      </a>
+      <b-button class="btn btn-primary btn-lg" @click="shuffle()">랜덤</b-button>
+      <div class="checkbox-group">
+        <b-form-checkbox class="checkbox" v-model="blindEng">영어 가리기</b-form-checkbox>
+        <b-form-checkbox class="checkbox" v-model="blindKor">뜻 가리기</b-form-checkbox>
+        <b-form-checkbox class="checkbox" v-model="small">작게</b-form-checkbox>
+        <b-form-checkbox class="checkbox" v-model="striped">줄무늬</b-form-checkbox>
+        <b-form-checkbox class="checkbox" v-model="bordered">줄칸 나누기</b-form-checkbox>
+      </div>
     </b-container>
 
     <b-container class="mt-4">
@@ -54,7 +58,7 @@
           "english": "Hello",
           "korean": "안녕하세요"
         }]
-      }, 
+      },
       tableHeaderProp: {
         type: Array,
         default: () => [{
@@ -65,8 +69,8 @@
     },
     data() {
       return {
-        fields: [{ 
-           "class": "indexWidth",
+        fields: [{
+            "class": "indexWidth",
             key: "index",
             label: ""
           },
@@ -76,7 +80,7 @@
             label: this.tableHeaderProp[0].english
           },
           {
-             "class": "vocaWidth",
+            "class": "vocaWidth",
             key: "korean",
             label: this.tableHeaderProp[0].korean
           }
@@ -120,31 +124,43 @@
       }
     },
   }
-</script>
 
+</script>
+<!-- 
 <style>
-[type=checkbox]:checked+label:before {
+.checkbox {
     background-color: palegreen !important;
 }
-.btn{
-    border: 2px solid palegreen;
-    background-color: white;
-    color: palegreen;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    font-weight: bold;
-}
-.table {
+</style>-->
+
+<style lang="scss" scoped>
+  @import "~styles/button";
+  @import "~styles/colors";
+  @import "~styles/checkbox";
+
+  .table {
     table-layout: fixed;
-    word-wrap: break-word;  
-}
-.indexWidth { width:10%; text-align:center;}
-.vocaWidth{ text-align:center; }
- @media print {
-   @page{ size:a4; margin-top: 20mm;}
-  .table td {
+    word-wrap: break-word;
+  }
+
+  .indexWidth {
+    width: 10%;
+    text-align: center;
+  }
+
+  .vocaWidth {
+    text-align: center;
+  }
+
+  @media print {
+    @page {
+      size: a4;
+      margin-top: 20mm;
+    }
+
+    .table td {
       background-color: transparent !important;
     }
- }
+  }
+
 </style>

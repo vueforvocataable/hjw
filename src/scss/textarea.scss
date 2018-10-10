@@ -1,0 +1,10 @@
+@import "~styles/colors";
+
+.text-field:focus {
+    border-color: $main-color;
+    box-shadow: 5px 5px $shadow-color;
+  }
+
+  .text-field {
+    border-color: $main-color;
+  }

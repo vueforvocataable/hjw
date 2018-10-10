@@ -1,0 +1,24 @@
+@import "~styles/colors";
+
+.btn:hover {
+    background-color: $main-color;
+    border-color: $main-color;
+    color: white;
+  }
+
+  .btn:focus {
+    border-color: $main-color;
+    box-shadow: 5px 5px $shadow-color;
+  }
+
+  .btn:active {
+    background-color: $main-color;
+    border-color: $main-color;
+    box-shadow: 5px 5px $shadow-color;
+  }
+
+  .btn {
+    background-color: white;
+    border-color: #DBDBDB;
+    color: #c03546;
+  }
