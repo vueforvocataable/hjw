@@ -21,8 +21,14 @@
         <b-col sm="4">
           <b-row>
             <b-button-group vertical size="sm" class="w-100 p-1 mx-auto">
-              <b-button :state="checkTextValidation" :disabled="checkTextValidation" class="btn" v-on:click="sendVocaToTable()">단어시험지 만들기</b-button>
-              <b-button class="btn" v-on:click="downloadVoca()">메모장으로 저장</b-button>
+              <b-button :state="checkTextValidation[0]" :disabled="checkTextValidation[0]" class="btn" v-on:click="sendVocaToTable()">
+                <b-img width="35" height="35" :src="checkTextValidation[1]" alt="left image" />
+                <span class="font-weight-bold">단어시험지 만들기</span>
+              </b-button>
+              <b-button class="btn" v-on:click="downloadVoca()">
+                <b-img width="35" height="35" :src="images.memo" alt="left image" />
+                <span class="font-weight-bold">메모장으로 저장</span>
+              </b-button>
               <b-form-file class="btn" v-b-popover.hover="'엑셀파일 설명...'" title="사용법" type=file ref="excelFileInput"
                 v-on:change="excelToVoca()" accept=".xlsx" />
             </b-button-group>
@@ -66,7 +72,12 @@
         voca: [],
         vocaHeader: [],
         serverUrl: "https://vocatestsserver.herokuapp.com",
-        remoteVocas: []
+        remoteVocas: [],
+        images: {
+          check: require('../assets/check.png'),
+          uncheck: require('../assets/uncheck.png'),
+          memo: require('../assets/memo.png')
+        }
       }
     },
     created() {
@@ -88,11 +99,11 @@
           const result = csvRegexp.test(arr[i])
 
           if (!result) { 
-            return true
+            return new Array(true, this.images.uncheck)
           }
         }
         
-        return false
+        return new Array(false, this.images.check)
       }
     },
     methods: {
@@ -250,8 +261,9 @@
   @import "~styles/colors";
   @import "~styles/textarea";
 
+  //안됨 왜?
+  //TODO 드레그엔 드롭 필드로 만들어도 괜찮을듯?
   .custom-file-input:lang(en)~.custom-file-label::after {
     content: "엑셀파일";
   }
-
 </style>
