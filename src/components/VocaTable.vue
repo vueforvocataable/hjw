@@ -5,13 +5,13 @@
         <b-button class="btn btn-primary btn-lg">인쇄</b-button>
       </a>
       <b-button class="btn btn-primary btn-lg" @click="shuffle()">랜덤</b-button>
-      <div class="checkbox-group">
+      <span class="checkbox-group">
         <b-form-checkbox class="checkbox" v-model="blindEng">영어 가리기</b-form-checkbox>
         <b-form-checkbox class="checkbox" v-model="blindKor">뜻 가리기</b-form-checkbox>
         <b-form-checkbox class="checkbox" v-model="small">작게</b-form-checkbox>
         <b-form-checkbox class="checkbox" v-model="striped">줄무늬</b-form-checkbox>
         <b-form-checkbox class="checkbox" v-model="bordered">줄칸 나누기</b-form-checkbox>
-      </div>
+      </span>
     </b-container>
 
     <b-container class="mt-4">

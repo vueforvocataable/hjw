@@ -1,7 +1,5 @@
-.checkbox:checked+label:before {
-    background-color: palegreen !important;
-}
+@import "../base/_colors";
 
-.checkbox {
-    background-color: palegreen !important;
-  }
+input[type="checkbox"]:checked+label:before {
+    background-color: $main-color !important;
+}
