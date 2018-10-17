@@ -52,20 +52,6 @@
 
 </script>
 
-<style>
-  .nav {
-    background-color: white;
-    box-shadow: 0px 1px #c03546;
-    font-weight: bold;
-  }
-  a {
-    color:#c03546;;
-  }
-   a:hover {
-    color:#c03546;
-    text-decoration: none;
-  }
-  .router-link-exact-active {
-  color: #c03546;
-}
+<style lang="scss">
+@import "./scss/_main";
 </style>

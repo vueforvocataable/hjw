@@ -90,11 +90,11 @@
     },
     computed: {
       checkTextValidation: function () {
-        const csvRegexp = /^[^,]+(,[^,]*)$/
+        const csvRegexp = /^[^,]+(,[^,]*)$/ //단어, 단어 이런 형식인지 판별
         const arr = this.text.split("\n")
 
         for (let i = 0; i < arr.length; i++) {
-          if (arr[i] == "") continue
+          if (arr[i] == "") continue //공백일 경우 스킵
 
           const result = csvRegexp.test(arr[i])
 
@@ -255,15 +255,3 @@
   }
 
 </script>
-
-<style lang="scss" scoped>
-  @import "~styles/button";
-  @import "~styles/colors";
-  @import "~styles/textarea";
-
-  //안됨 왜?
-  //TODO 드레그엔 드롭 필드로 만들어도 괜찮을듯?
-  .custom-file-input:lang(en)~.custom-file-label::after {
-    content: "엑셀파일";
-  }
-</style>
