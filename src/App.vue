@@ -31,19 +31,12 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import BootstrapVue from 'bootstrap-vue'
-  import 'bootstrap/dist/css/bootstrap.css'
-  import 'bootstrap-vue/dist/bootstrap-vue.css'
-
-  import Explanation from './components/Explanation.vue'
-
-  Vue.use(BootstrapVue)
-
+  // import Explanation from './components/Explanation.vue'
+  
   export default {
     name: 'App',
     components: {
-      Explanation
+      // Explanation
     },
     data: function () {
       return {}

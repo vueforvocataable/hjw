@@ -193,7 +193,14 @@
       downloadVoca: function () {
         if (this.text.length < 1) return;
 
-        var blob = new Blob([this.text], {
+        //TODO 공백기준으로 x
+        let test = this.text
+        let test2 = ""
+        test.split(" ").forEach(string => {
+          test2 += (string += "\r\n")
+        })
+
+        var blob = new Blob([test2], {
           type: "text/plain;charset=utf-8"
         });
         saveAs(blob, "Voca.txt");
