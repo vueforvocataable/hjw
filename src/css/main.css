@@ -1,0 +1,65 @@
+.btn:hover {
+  background-color: #c03546;
+  border-color: #c03546;
+  color: white; }
+
+.btn:focus {
+  border-color: #c03546;
+  -webkit-box-shadow: 5px 5px #f88585;
+  box-shadow: 5px 5px #f88585; }
+
+.btn:active {
+  background-color: #c03546;
+  border-color: #c03546;
+  -webkit-box-shadow: 5px 5px #f88585;
+  box-shadow: 5px 5px #f88585; }
+
+.btn {
+  background-color: white;
+  border-color: #DBDBDB;
+  color: #c03546; }
+
+.text-field:focus {
+  border-color: #c03546;
+  -webkit-box-shadow: 5px 5px #f88585;
+  box-shadow: 5px 5px #f88585; }
+
+.text-field {
+  border-color: #c03546; }
+
+input[type="checkbox"]:checked + label:before {
+  background-color: #c03546 !important; }
+
+.nav {
+  background-color: white;
+  -webkit-box-shadow: 0px 1px #c03546;
+  box-shadow: 0px 1px #c03546;
+  font-weight: bold; }
+
+a {
+  color: #c03546; }
+
+a:hover {
+  color: #c03546;
+  text-decoration: none; }
+
+.router-link-exact-active {
+  color: #c03546; }
+
+.table {
+  table-layout: fixed;
+  word-wrap: break-word; }
+
+.indexWidth {
+  width: 10%;
+  text-align: center; }
+
+.vocaWidth {
+  text-align: center; }
+
+@media print {
+  @page {
+    size: a4;
+    margin-top: 20mm; }
+  .table td {
+    background-color: transparent !important; } }

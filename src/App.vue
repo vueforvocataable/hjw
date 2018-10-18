@@ -46,5 +46,5 @@
 </script>
 
 <style lang="scss">
-@import "./scss/_main";
+@import url(./css/main.css);
 </style>
