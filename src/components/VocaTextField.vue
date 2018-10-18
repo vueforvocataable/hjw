@@ -99,12 +99,12 @@
     methods: {
        checkTextValidation: function (text) {
         const csvRegexp = /^[^,]+(,[^,]*)$/ //단어, 단어 이런 형식인지 판별
-        const arr = text.split("\n")
+        const vocas = text.split("\n")
 
-        for (let i = 0; i < arr.length; i++) {
-          if (arr[i] == "") continue //공백일 경우 스킵
+        for (let i = 0; i < vocas.length; i++) {
+          if (vocas[i] == "") continue //공백일 경우 스킵
 
-          const result = csvRegexp.test(arr[i])
+          const result = csvRegexp.test(vocas[i])
 
           if (!result) { 
             return true
@@ -197,18 +197,21 @@
       //파일 저장 버튼 누르면 실행
       //텍스트 필드의 텍스트를 파일로 저장함
       downloadVoca: function () {
-        if (this.text.length < 1) return;
+        if (this.text === undefined || this.text.length < 1) return;
 
-        //TODO 공백기준으로 x
-        let test = this.text
-        let test2 = ""
-        test.split(" ").forEach(string => {
-          test2 += (string += "\r\n")
+        const text = this.text
+        const newlineRegexp = /\r\n|\r|\n/
+        const noNewlineTexts = text.split(newlineRegexp)
+
+        let temp = ""
+        noNewlineTexts.forEach(str => {
+          temp += (str += "\r\n") //각 배열에 newline을 추가해줌
         })
 
-        var blob = new Blob([test2], {
+        const blob = new Blob([temp], {
           type: "text/plain;charset=utf-8"
         });
+
         saveAs(blob, "Voca.txt");
       },
       //로컬스토리지에 저장한 데이터를 가져옴
