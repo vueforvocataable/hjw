@@ -21,8 +21,8 @@
         <b-col sm="4">
           <b-row>
             <b-button-group vertical size="sm" class="w-100 p-1 mx-auto">
-              <b-button :state="checkTextValidation[0]" :disabled="checkTextValidation[0]" class="btn" v-on:click="sendVocaToTable()">
-                <b-img width="35" height="35" :src="checkTextValidation[1]" alt="left image" />
+              <b-button :state="validationImage[0]" :disabled="validationImage[0]" class="btn" v-on:click="sendVocaToTable()">
+                <b-img width="35" height="35" :src="validationImage[1]" alt="left image" />
                 <span class="font-weight-bold">단어시험지 만들기</span>
               </b-button>
               <b-button class="btn" v-on:click="downloadVoca()">
@@ -89,9 +89,17 @@
       this.postVocas(this.voca);
     },
     computed: {
-      checkTextValidation: function () {
+        validationImage: function () {
+        if (this.checkTextValidation(this.text)) {
+          return new Array(true, this.images.uncheck) //boolean값과 그에 맞는 사진 url을 반환
+        }
+        return new Array(false, this.images.check) //boolean값과 그에 맞는 사진 url을 반환
+      },
+    },
+    methods: {
+       checkTextValidation: function (text) {
         const csvRegexp = /^[^,]+(,[^,]*)$/ //단어, 단어 이런 형식인지 판별
-        const arr = this.text.split("\n")
+        const arr = text.split("\n")
 
         for (let i = 0; i < arr.length; i++) {
           if (arr[i] == "") continue //공백일 경우 스킵
@@ -99,14 +107,12 @@
           const result = csvRegexp.test(arr[i])
 
           if (!result) { 
-            return new Array(true, this.images.uncheck)
+            return true
           }
         }
         
-        return new Array(false, this.images.check)
-      }
-    },
-    methods: {
+        return false
+      },
       postVocas: function (voca) {
         if (!voca || voca.length < 1) return;
         let router = "/api/voca";
@@ -260,5 +266,4 @@
       }
     }
   }
-
 </script>
