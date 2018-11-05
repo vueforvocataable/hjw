@@ -14,6 +14,11 @@
         <b-col sm="8">
           <main class="main">
             <b-form-textarea v-b-popover.hover="'첫 줄은 단어시험지의 헤더, 각 단어 사이는 \',\'로 구분합니다.'"
+            placeholder=
+            "영어단어, 한글
+  Simple, 간단한
+  Voca, 단어
+  Test paper, 시험지 "
               title="사용법" autofocus class="text-field" id="inputField" no-resize :rows="20" :max-rows="20" v-model="text" />
           </main>
         </b-col>
@@ -67,7 +72,7 @@
     data() {
       return {
         //텍스트 에이리어에 있는 텍스트를 담는 변수
-        text: "영어단어, 한글\nSimple, 간단한\nVoca, 단어\nTest paper, 시험지 ",
+        text: "",
         //텍스트를 리폼한 단어를 담는 변수
         voca: [],
         vocaHeader: [],
