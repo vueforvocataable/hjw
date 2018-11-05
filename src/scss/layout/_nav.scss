@@ -1,17 +1,28 @@
 @import "../base/_colors";
 
 .nav {
-    background-color: white;
-    box-shadow: 0px 1px $main-color;
-    font-weight: bold;
+  background-color: white;
+  box-shadow: 0px 1px $main-color;
+  font-weight: bold;
+}
+
+a {
+  color: $main-color;
+
+  &:hover {
+    color: $main-color;
+    text-decoration: underline;
   }
-  a {
-    color:$main-color;
+
+  &:active {
+    color: $active-color;
   }
-   a:hover {
-    color:$main-color;
-    text-decoration: none;
+
+  &:focus {
+    color: $active-color;
   }
-  .router-link-exact-active {
+}
+
+.router-link-exact-active {
   color: $main-color;
 }

@@ -1,0 +1,12 @@
+@import "../base/_colors";
+
+.card {
+  &:hover {
+    background-color: $hover-color;
+  }
+
+  &:active {
+    background-color: white;
+    border-color: $main-color;
+  }
+}

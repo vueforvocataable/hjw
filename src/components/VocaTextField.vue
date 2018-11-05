@@ -48,8 +48,8 @@
       <b-row>
         <b-col>
           <b-card-group columns class="mt-4">
-            <b-card class="text-center" v-for="(remoteVoca, index) in remoteVocas" :key="index">
-              <pre>{{remoteVoca.voca}}</pre>
+            <b-card class="card text-center" v-for="(remoteVoca, index) in remoteVocas" :key="index">
+              <pre v-on:click="copy(remoteVoca)">{{remoteVoca.voca}}</pre>
             </b-card>
           </b-card-group>
         </b-col>
@@ -271,6 +271,9 @@
         } catch (err) {
           console.log(err.message)
         }
+      },
+      copy: function(remoteVoca) {
+        this.text = remoteVoca.voca
       }
     }
   }
