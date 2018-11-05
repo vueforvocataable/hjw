@@ -1,10 +1,10 @@
 @import "../base/_colors";
 
-.text-field:focus {
+.text-field {
+  border-color: $main-color;
+
+  &:focus {
     border-color: $main-color;
     box-shadow: 5px 5px $shadow-color;
   }
-
-  .text-field {
-    border-color: $main-color;
-  }
+}
