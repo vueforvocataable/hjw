@@ -1,71 +1,99 @@
 .nav {
-  background-color: white;
-  -webkit-box-shadow: 0px 1px #c03444;
-  box-shadow: 0px 1px #c03444;
-  font-weight: bold; }
+    background-color: white;
+    -webkit-box-shadow: 0px 1px #c03444;
+    box-shadow: 0px 1px #c03444;
+    font-weight: bold;
+}
 
 a {
-  color: #c03444; }
-  a:hover {
     color: #c03444;
-    text-decoration: underline; }
-  a:active {
-    color: #f88585; }
-  a:focus {
-    color: #f88585; }
+}
+
+a:hover {
+    color: #c03444;
+    text-decoration: underline;
+}
+
+a:active {
+    color: #f88585;
+}
+
+a:focus {
+    color: #f88585;
+}
 
 .router-link-exact-active {
-  color: #c03444; }
+    color: #c03444;
+}
 
 .table {
-  table-layout: fixed;
-  word-wrap: break-word; }
+    /* table-layout: fixed; */
+    word-wrap: break-word;
+}
 
 .indexWidth {
-  width: 10%;
-  text-align: center; }
+    width: 10%;
+    text-align: center;
+}
 
 .vocaWidth {
-  text-align: center; }
+    text-align: center;
+}
 
 @media print {
-  @page {
-    size: a4;
-    margin-top: 20mm; }
-  .table td {
-    background-color: transparent !important; } }
+    @page {
+        size: a4;
+        margin-top: 20mm;
+    }
+    .table td {
+        background-color: transparent !important;
+    }
+}
 
 .btn {
-  background-color: white;
-  border-color: #DBDBDB;
-  color: #c03546; }
-  .btn:hover {
+    background-color: white;
+    border-color: #DBDBDB;
+    color: #c03546;
+}
+
+.btn:hover {
     background-color: #c03444;
     border-color: #c03444;
-    color: white; }
-  .btn:focus {
+    color: white;
+}
+
+.btn:focus {
     border-color: #c03444;
     -webkit-box-shadow: 5px 5px #f88585;
-    box-shadow: 5px 5px #f88585; }
-  .btn:active {
+    box-shadow: 5px 5px #f88585;
+}
+
+.btn:active {
     background-color: #c03444;
     border-color: #c03444;
     -webkit-box-shadow: 5px 5px #f88585;
-    box-shadow: 5px 5px #f88585; }
+    box-shadow: 5px 5px #f88585;
+}
 
 .text-field {
-  border-color: #c03444; }
-  .text-field:focus {
+    border-color: #c03444;
+}
+
+.text-field:focus {
     border-color: #c03444;
     -webkit-box-shadow: 5px 5px #f88585;
-    box-shadow: 5px 5px #f88585; }
+    box-shadow: 5px 5px #f88585;
+}
 
-input[type="checkbox"]:checked + label:before {
-  background-color: #c03444 !important; }
+input[type="checkbox"]:checked+label:before {
+    background-color: #c03444 !important;
+}
 
 .card:hover {
-  background-color: #f0f0f0; }
+    background-color: #f0f0f0;
+}
 
 .card:active {
-  background-color: white;
-  border-color: #c03444; }
+    background-color: white;
+    border-color: #c03444;
+}
