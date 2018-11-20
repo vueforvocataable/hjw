@@ -1,10 +1,19 @@
 @import "../base/_colors";
+@import "../base/_size";
 
-.text-field {
+.textfield {
   border-color: $main-color;
+  text-align: center;
+  height: $textfield-size;
+  max-height: $textfield-size;
+  border: $border-size solid $main-color;
+  width: 100%;
+  margin: 0px !important;
+  padding: 0px !important;
+  font-weight: bold;
 
   &:focus {
     border-color: $main-color;
-    box-shadow: 5px 5px $shadow-color;
+    box-shadow: 7px 7px $main-color;
   }
 }
