@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal id="upLode"
+    <b-modal id="upLoad"
      @ok="showImg">
       <div v-if="!image">
         <h4>이미지 선택</h4>
@@ -26,6 +26,7 @@
       //상위로 이미지 전달 
       showImg: function () {
         this.$emit('show-Img', this.image); 
+        console.log("asd")
       },
       //이미지 파일 넣는 과정 
       onFileChange(e) {

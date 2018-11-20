@@ -3,49 +3,51 @@
     <b-container>
       <div class="d-print-none">
         <a href="javascript:window.print()">
-          <b-button class="btn  btn-lg">인쇄</b-button>
+          <b-button class="btn btn-lg">인쇄</b-button>
         </a>
         <b-button class="btn btn-lg" @click="isSuffle = !isSuffle">단어섞기</b-button>
-<b-button v-b-modal.upLode class="btn btn-lg">워터마크</b-button>
-
-<b-form-group>
-           <b-form-checkbox buttons class="checkbox" v-model="blindZigzag">지그재그</b-form-checkbox>
+        <b-button v-b-modal.upLoad class="btn btn-lg">워터마크</b-button>
+        <b-form-group>
+          <b-form-checkbox class="checkbox" v-model="blindZigzag" v-show="blindEng || blindKor || blindZigzag">지그재그</b-form-checkbox>
           <b-form-checkbox class="checkbox" v-model="blindEng">영어 가리기</b-form-checkbox>
-          <b-form-checkbox class="checkbox" v-model="blindKor">뜻 가리기</b-form-checkbox> 
-          <b-form-checkbox class="checkbox" v-model="small">작게</b-form-checkbox>
+          <b-form-checkbox class="checkbox" v-model="blindKor">뜻 가리기</b-form-checkbox>
+          <b-form-checkbox class="checkbox" v-model="small">작게(하단 입력부분)</b-form-checkbox>
           <b-form-checkbox class="checkbox" v-model="striped">줄무늬</b-form-checkbox>
           <b-form-checkbox class="checkbox" v-model="bordered">줄칸 나누기</b-form-checkbox>
-          </b-form-group>
+        </b-form-group>
       </div>
     </b-container>
 
-    <upLodeModal @show-Img="showImg2" ></upLodeModal>
-
     <div class="table-container">
-     <div v-for="(items, index) in countTable" :key="index">
-       <div class="repeatTable">  
-              <div class="backgroundImg">
-       <img :src = "image" height="100%" width="100%" v-show="image"/>
-       </div>   
-       <voca-table :src="image" :is="items" :vocaProp="cutVoca(index)" :blindEng="blindEng"
-      :blindKor="blindKor" :blindZigzag="blindZigzag" :small="small" :striped="striped" :bordered="bordered"
-      :tableHeaderProp="tableHeaderProp" :isSuffle="isSuffle"></voca-table>
+      <div v-for="(items, index) in countTable" :key="index">
+        <div class="repeatTable">
+          <div class="backgroundImg">
+            <img :src="image" v-show="image" />
+          </div>
+          <voca-table :src="image" :is="items" :vocaProp="cutVoca(index)" :blindEng="blindEng" :blindKor="blindKor"
+            :blindZigzag="blindZigzag" :small="small" :striped="striped" :bordered="bordered" :tableHeaderProp="tableHeaderProp"
+            :isSuffle="isSuffle"></voca-table>
+            <b-container>
+        
+            </b-container>
+        </div>
       </div>
     </div>
-  </div>
+     <upLoadModal @show-Img="showImg2"></upLoadModal>
+
   </div>
 </template>
 
 <script>
   import VocaTable from './VocaTable.vue';
-  import upLodeModal from './upLodeModal.vue';
+  import upLoadModal from './upLoadModal.vue';
 
   import _ from 'underscore';
   export default {
     name: "TablePageLayout",
     components: {
       'vocaTable': VocaTable,
-      'upLodeModal' : upLodeModal
+      'upLoadModal': upLoadModal,
     },
     props: {
 
@@ -95,14 +97,14 @@
         sliceVocaProps: [],
         isSuffle: false,
         showModal: false,
-        image:"",
+        image: "",
       }
     },
     mounted() {
       this.addTable()
     },
     methods: {
-      showImg2: function(modalImage) {
+      showImg2: function (modalImage) {
         this.image = modalImage
         return this.image
       },
@@ -117,5 +119,6 @@
         return slicedVoca
       },
     },
-}
+  }
+
 </script>
