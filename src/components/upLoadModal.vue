@@ -4,12 +4,14 @@
      @ok="showImg">
       <div v-if="!image">
         <h4>이미지 선택</h4>
-        <b-form-file @change="onFileChange" v-model="file" accept="image/*" :state="Boolean(file)" placeholder="Choose a file..."></b-form-file>
+        <b-form-file @change="onFileChange" v-model="file" accept="image/*" :state="Boolean(file)" placeholder="워터마크로 적용할 사진 선택"></b-form-file>
       </div>
       <div v-else>
-        <img :src="image" />
-        <b-button @click="removeImage">워터마크 지우기</b-button>
+        <img :src="image" class="modalImg"/>
       </div>
+      <div slot="modal-header" class="w-100">
+            <b-button @click="removeImage">초기화</b-button>
+        </div>
     </b-modal>
   </div>
 </template>
@@ -26,7 +28,6 @@
       //상위로 이미지 전달 
       showImg: function () {
         this.$emit('show-Img', this.image); 
-        console.log("asd")
       },
       //이미지 파일 넣는 과정 
       onFileChange(e) {
@@ -49,7 +50,6 @@
       },
     }
   }
-
 </script>
 
 <style>

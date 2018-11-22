@@ -77,6 +77,8 @@
     },
     data() {
       return {
+      zigzagblindEng: false,
+      zigzagblindKor: false,
         fields: [{
             "class": "indexWidth",
             key: "index",
@@ -103,7 +105,7 @@
       this.createTable();
       
     },
-    computed: {},
+
     methods: {
       init: function () {
         //공백 만들 개수 생성.
@@ -130,9 +132,6 @@
       zigzag: function (value) {
         if (this.blindZigzag == true) {
           return value % 2;
-        }
-        if (this.blindEng == true) {
-          return 0
         }
       },
       shuffle: function () {

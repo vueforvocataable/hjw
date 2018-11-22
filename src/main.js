@@ -9,18 +9,19 @@ import 'vuetify/dist/vuetify.min.css'
 import Vuetify from 'vuetify'
 import '@fortawesome/fontawesome-free/css/all.css'
 
+
 Vue.use(Vuetify, {
-  iconfont: 'fa'
- })
+    iconfont: 'fa'
+})
 Vue.use(BootstrapVue)
-Vue.use(VueRouter) 
+Vue.use(VueRouter)
 const router = new VueRouter({
-  routes: Routes
+    routes: Routes
 })
 router.replace({ path: "textfield" })
 
 new Vue({
-  el: '#app',
-  render: h => h(App),
-  router: router
+    el: '#app',
+    render: h => h(App),
+    router: router
 })
